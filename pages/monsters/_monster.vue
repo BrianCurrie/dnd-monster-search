@@ -1,5 +1,6 @@
 <template>
   <div v-if="monster.name !== undefined">
+    <NuxtLink to="/"> Back </NuxtLink>
     <h1>{{ monster.name }}</h1>
     <i>{{ monster.size }} {{ monster.type }}, {{ monster.alignment }}</i>
     <hr />
@@ -72,7 +73,7 @@
       >
       {{ ability.desc }}
     </p>
-    <div v-if="monster.actions">
+    <div v-if="monster.actions.length !== 0">
       <h2>Actions</h2>
       <hr />
       <p v-for="action in monster.actions">
@@ -82,7 +83,7 @@
         {{ action.desc }}
       </p>
     </div>
-    <div v-if="monster.legendary_actions">
+    <div v-if="monster.legendary_actions.length !== 0">
       <h2>Legendary Actions</h2>
       <hr />
       <p v-for="action in monster.legendary_actions">
@@ -97,13 +98,12 @@
 </template>
 
 <script>
-const url = "https://www.dnd5eapi.co/api/monsters/adult-blue-dragon";
-
 export default {
   name: "MonsterPage",
   data() {
     return {
       monster: {},
+      monster_id: "",
     };
   },
   methods: {
@@ -143,6 +143,10 @@ export default {
     },
   },
   async mounted() {
+    //adult-blue-dragon
+    const monster = this.$route.params.monster;
+    const url = `https://www.dnd5eapi.co/api/monsters/${monster}`;
+
     this.monster = await this.$axios.$get(url);
   },
 };

@@ -6,7 +6,9 @@
       outlined
       clearable
     />
-    <p v-for="monster in filteredMonsters">{{ monster.name }}</p>
+    <p v-for="monster in filteredMonsters">
+      <NuxtLink :to="'/monsters/' + monster.index">{{ monster.name }}</NuxtLink>
+    </p>
   </div>
 </template>
 
@@ -20,7 +22,7 @@ export default {
   },
   computed: {
     filteredMonsters() {
-      if (this.searchInput === "") {
+      if (!this.searchInput) {
         return [];
       }
       // Currently only matching based on if the name starts with input value
