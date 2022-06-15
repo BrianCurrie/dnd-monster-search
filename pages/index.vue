@@ -1,23 +1,40 @@
 <template>
   <div>
-    {{ monsterData }}
+    <v-text-field
+      v-model="searchInput"
+      label="Monster Search"
+      outlined
+      clearable
+    />
+    <p v-for="monster in filteredMonsters">{{ monster.name }}</p>
   </div>
 </template>
 
 <script>
-const url = "https://www.dnd5eapi.co/api/monsters/adult-blue-dragon";
+const url = "https://www.dnd5eapi.co/api/monsters";
 
 export default {
   name: "IndexPage",
   data() {
-    return {
-      monsterData: {},
-      monsterName: "a",
-    };
+    return { searchInput: "", monsters: [] };
   },
-  methods: {},
+  computed: {
+    filteredMonsters() {
+      if (this.searchInput === "") {
+        return [];
+      }
+      // Currently only matching based on if the name starts with input value
+      // Todo: Match based on starts with and contains input value
+      // Displaying results that start with input value higher
+      return this.monsters.filter((monster) =>
+        monster.name.toLowerCase().startsWith(this.searchInput.toLowerCase())
+      );
+    },
+  },
+
   async mounted() {
-    this.monsterData = await this.$axios.$get(url);
+    const data = await this.$axios.$get(url);
+    this.monsters = data.results;
   },
 };
 </script>
