@@ -8,15 +8,16 @@
         class="mx-3"
         :items="monsters"
         v-model="searchInput"
-        label="Monster Search"
+        label="Search"
         item-text="name"
         outlined
         clearable
         return-object
         prepend-inner-icon="mdi-magnify"
         hide-details
+        auto-select-first
       />
-      <v-container class="text-center"
+      <v-container class="text-center pa-4"
         ><v-btn class="mr-2" @click="search">Search</v-btn
         ><v-btn @click="imFeelingLucky">I'm Feeling Lucky</v-btn></v-container
       >

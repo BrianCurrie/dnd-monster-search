@@ -1,100 +1,135 @@
 <template>
-  <div v-if="monster.name !== undefined">
-    <NuxtLink to="/"> Back </NuxtLink>
-    <h1>{{ monster.name }}</h1>
-    <i>{{ monster.size }} {{ monster.type }}, {{ monster.alignment }}</i>
-    <hr />
-    <p><b>Armor Class</b> {{ monster.armor_class }}</p>
-    <p><b>Hit Points</b> {{ monster.hit_points }} ({{ monster.hit_dice }})</p>
-    <p>
-      <b>Speed</b>{{ " " }}
-      <span v-for="(value, key) in monster.speed"
-        >{{ key }}: {{ value }}{{ " " }}</span
+  <v-container v-if="monster.name !== undefined">
+    <v-card class="mx-auto pa-6" max-width="800">
+      <v-btn to="/" nuxt> <v-icon> mdi-arrow-left</v-icon> Back </v-btn>
+      <v-card-title class="text-h4 text-break">{{ monster.name }}</v-card-title>
+      <v-card-subtitle class="font-italic text-subtitle-1"
+        >{{ monster.size }} {{ monster.type }},
+        {{ monster.alignment }}</v-card-subtitle
       >
-    </p>
-    <hr />
-    <p>
-      <b>STR</b> {{ monster.strength }} ({{
-        this.getAbilityScore(monster.strength)
-      }})
-    </p>
-    <p>
-      <b>DEX</b> {{ monster.dexterity }} ({{
-        this.getAbilityScore(monster.dexterity)
-      }})
-    </p>
-    <p>
-      <b>CON</b> {{ monster.constitution }} ({{
-        this.getAbilityScore(monster.constitution)
-      }})
-    </p>
-    <p>
-      <b>INT</b> {{ monster.intelligence }} ({{
-        this.getAbilityScore(monster.intelligence)
-      }})
-    </p>
-    <p>
-      <b>WIS</b> {{ monster.wisdom }} ({{
-        this.getAbilityScore(monster.wisdom)
-      }})
-    </p>
-    <p>
-      <b>CHA</b> {{ monster.charisma }} ({{
-        this.getAbilityScore(monster.charisma)
-      }})
-    </p>
-    <hr />
-    <p>
-      <b>Saving Throws</b>{{ " " }}
-      <span v-for="savingThrow in savingThrows"
-        >{{ savingThrow.proficiency.name.replace("Saving Throw: ", "") }}
-        {{ savingThrow.value }}{{ " " }}
-      </span>
-    </p>
-    <p>
-      <b>Skills</b>{{ " " }}
-      <span v-for="skill in skills"
-        >{{ skill.proficiency.name.replace("Skill: ", "") }} {{ skill.value
-        }}{{ " " }}
-      </span>
-    </p>
-    <p>
-      <b>Senses</b>{{ " " }}
-      <span v-for="(value, key) in monster.senses"
-        >{{ key.replace("_", " ") }}: {{ value }}{{ " " }}</span
-      >
-    </p>
-    <p><b>Languages</b> {{ monster.languages }}</p>
-    <p><b>Challenge</b> {{ monster.challenge_rating }} ({{ monster.xp }} XP)</p>
-    <hr />
-    <p v-for="ability in monster.special_abilities">
-      <b
-        ><i>{{ ability.name }}</i></b
-      >
-      {{ ability.desc }}
-    </p>
-    <div v-if="monster.actions.length !== 0">
-      <h2>Actions</h2>
-      <hr />
-      <p v-for="action in monster.actions">
-        <b
-          ><i>{{ action.name }}</i></b
+      <div>
+        <v-divider class="my-2" />
+
+        <v-card-text class="py-2"
+          ><b>Armor Class</b> {{ monster.armor_class }}</v-card-text
         >
-        {{ action.desc }}
-      </p>
-    </div>
-    <div v-if="monster.legendary_actions.length !== 0">
-      <h2>Legendary Actions</h2>
-      <hr />
-      <p v-for="action in monster.legendary_actions">
-        <b
-          ><i>{{ action.name }}</i></b
+        <v-card-text class="py-2"
+          ><b>Hit Points</b> {{ monster.hit_points }} ({{
+            monster.hit_dice
+          }})</v-card-text
         >
-        {{ action.desc }}
-      </p>
-    </div>
-  </div>
-  <div v-else>Loading...</div>
+        <v-card-text class="py-2">
+          <b>Speed</b>{{ " " }}
+          <span v-for="(value, key) in monster.speed"
+            >{{ key }}: {{ value }}{{ " " }}</span
+          >
+        </v-card-text>
+        <v-divider class="my-2" />
+        <v-container class="d-flex pa-0 overflow-x-auto">
+          <v-card-text class="text-center">
+            <b>STR</b>
+            <div>
+              {{ monster.strength }} ({{
+                this.getAbilityScore(monster.strength)
+              }})
+            </div>
+          </v-card-text>
+          <v-card-text class="text-center">
+            <b>DEX</b>
+            <div>
+              {{ monster.dexterity }} ({{
+                this.getAbilityScore(monster.dexterity)
+              }})
+            </div>
+          </v-card-text>
+          <v-card-text class="text-center">
+            <b>CON</b>
+            <div>
+              {{ monster.constitution }} ({{
+                this.getAbilityScore(monster.constitution)
+              }})
+            </div>
+          </v-card-text>
+          <v-card-text class="text-center">
+            <b>INT</b>
+            <div>
+              {{ monster.intelligence }} ({{
+                this.getAbilityScore(monster.intelligence)
+              }})
+            </div>
+          </v-card-text>
+          <v-card-text class="text-center">
+            <b>WIS</b>
+            <div>
+              {{ monster.wisdom }} ({{ this.getAbilityScore(monster.wisdom) }})
+            </div>
+          </v-card-text>
+          <v-card-text class="text-center">
+            <b>CHA</b>
+            <div>
+              {{ monster.charisma }} ({{
+                this.getAbilityScore(monster.charisma)
+              }})
+            </div>
+          </v-card-text>
+        </v-container>
+        <v-divider class="my-2" />
+        <v-card-text class="py-2">
+          <b>Saving Throws</b>{{ " " }}
+          <span v-for="savingThrow in savingThrows"
+            >{{ savingThrow.proficiency.name.replace("Saving Throw: ", "") }}
+            {{ savingThrow.value }}{{ " " }}
+          </span>
+        </v-card-text>
+        <v-card-text class="py-2">
+          <b>Skills</b>{{ " " }}
+          <span v-for="skill in skills"
+            >{{ skill.proficiency.name.replace("Skill: ", "") }} {{ skill.value
+            }}{{ " " }}
+          </span>
+        </v-card-text>
+        <v-card-text class="py-2">
+          <b>Senses</b>{{ " " }}
+          <span v-for="(value, key) in monster.senses"
+            >{{ key.replace("_", " ") }}: {{ value }}{{ " " }}</span
+          >
+        </v-card-text>
+        <v-card-text class="py-2"
+          ><b>Languages</b> {{ monster.languages }}</v-card-text
+        >
+        <v-card-text class="py-2">
+          <b>Challenge</b> {{ monster.challenge_rating }} ({{ monster.xp }} XP)
+        </v-card-text>
+        <v-divider class="my-2" />
+        <v-card-text class="py-2" v-for="ability in monster.special_abilities">
+          <b
+            ><i>{{ ability.name }}</i></b
+          >
+          {{ ability.desc }}
+        </v-card-text>
+      </div>
+      <div v-if="monster.actions.length !== 0">
+        <v-card-title class="text-h5">Actions</v-card-title>
+        <v-divider class="mb-2" />
+        <v-card-text class="py-2" v-for="action in monster.actions">
+          <b
+            ><i>{{ action.name }}</i></b
+          >
+          {{ action.desc }}
+        </v-card-text>
+      </div>
+      <div v-if="monster.legendary_actions.length !== 0">
+        <v-card-title class="text-h5">Legendary Actions</v-card-title>
+        <v-divider class="mb-2" />
+        <v-card-text class="py-2" v-for="action in monster.legendary_actions">
+          <b
+            ><i>{{ action.name }}</i></b
+          >
+          {{ action.desc }}
+        </v-card-text>
+      </div>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
@@ -143,8 +178,8 @@ export default {
     },
   },
   async mounted() {
-    const monster = this.$store.state.monster;
-    const url = `https://www.dnd5eapi.co/api/monsters/${monster}`;
+    const monsterIndex = this.$store.state.monster;
+    const url = `https://www.dnd5eapi.co/api/monsters/${monsterIndex}`;
 
     this.monster = await this.$axios.$get(url);
   },
