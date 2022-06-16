@@ -143,8 +143,7 @@ export default {
     },
   },
   async mounted() {
-    //adult-blue-dragon
-    const monster = this.$route.params.monster;
+    const monster = this.$store.state.monster;
     const url = `https://www.dnd5eapi.co/api/monsters/${monster}`;
 
     this.monster = await this.$axios.$get(url);

@@ -1,15 +1,27 @@
 <template>
-  <div>
-    <v-text-field
-      v-model="searchInput"
-      label="Monster Search"
-      outlined
-      clearable
-    />
-    <p v-for="monster in filteredMonsters">
-      <NuxtLink :to="'/monsters/' + monster.index">{{ monster.name }}</NuxtLink>
-    </p>
-  </div>
+  <v-container>
+    <v-card class="mx-auto" max-width="600">
+      <v-card-title class="justify-center text-h4"
+        >DnD Monster Search</v-card-title
+      >
+      <v-autocomplete
+        class="mx-3"
+        :items="monsters"
+        v-model="searchInput"
+        label="Monster Search"
+        item-text="name"
+        outlined
+        clearable
+        return-object
+        prepend-inner-icon="mdi-magnify"
+        hide-details
+      />
+      <v-container class="text-center"
+        ><v-btn class="mr-2" @click="search">Search</v-btn
+        ><v-btn @click="imFeelingLucky">I'm Feeling Lucky</v-btn></v-container
+      >
+    </v-card>
+  </v-container>
 </template>
 
 <script>
@@ -18,19 +30,24 @@ const url = "https://www.dnd5eapi.co/api/monsters";
 export default {
   name: "IndexPage",
   data() {
-    return { searchInput: "", monsters: [] };
+    return {
+      searchInput: {},
+      monsters: [],
+    };
   },
-  computed: {
-    filteredMonsters() {
-      if (!this.searchInput) {
-        return [];
-      }
-      // Currently only matching based on if the name starts with input value
-      // Todo: Match based on starts with and contains input value
-      // Displaying results that start with input value higher
-      return this.monsters.filter((monster) =>
-        monster.name.toLowerCase().startsWith(this.searchInput.toLowerCase())
+
+  methods: {
+    search() {
+      this.$store.commit("changeMonster", this.searchInput.index);
+      this.$router.push("monsters");
+    },
+    imFeelingLucky() {
+      this.$store.commit(
+        "changeMonster",
+        this.monsters[Math.floor(Math.random() * this.monsters.length - 1)]
+          .index
       );
+      this.$router.push("monsters");
     },
   },
 
