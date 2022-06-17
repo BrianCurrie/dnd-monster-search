@@ -101,7 +101,11 @@
           <b>Challenge</b> {{ monster.challenge_rating }} ({{ monster.xp }} XP)
         </v-card-text>
         <v-divider class="my-2" />
-        <v-card-text class="py-2" v-for="ability in monster.special_abilities">
+        <v-card-text
+          class="py-2"
+          :key="ability.name"
+          v-for="ability in monster.special_abilities"
+        >
           <b
             ><i>{{ ability.name }}</i></b
           >
@@ -111,7 +115,11 @@
       <div v-if="monster.actions.length !== 0">
         <v-card-title class="text-h5">Actions</v-card-title>
         <v-divider class="mb-2" />
-        <v-card-text class="py-2" v-for="action in monster.actions">
+        <v-card-text
+          class="py-2"
+          :key="action.name"
+          v-for="action in monster.actions"
+        >
           <b
             ><i>{{ action.name }}</i></b
           >
@@ -121,7 +129,11 @@
       <div v-if="monster.legendary_actions.length !== 0">
         <v-card-title class="text-h5">Legendary Actions</v-card-title>
         <v-divider class="mb-2" />
-        <v-card-text class="py-2" v-for="action in monster.legendary_actions">
+        <v-card-text
+          class="py-2"
+          :key="action.name"
+          v-for="action in monster.legendary_actions"
+        >
           <b
             ><i>{{ action.name }}</i></b
           >
