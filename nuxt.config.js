@@ -59,6 +59,11 @@ export default {
     },
   },
 
+  // Router base config so we can host on github-pages: https://nuxtjs.org/deployments/github-pages/
+  router: {
+    base: "/dnd-monster-search/",
+  },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 };
