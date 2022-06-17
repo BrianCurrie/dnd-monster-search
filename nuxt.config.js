@@ -64,6 +64,11 @@ export default {
     base: "/dnd-monster-search/",
   },
 
+  // Handle refresh issues for github-pages: https://github.com/nuxt/nuxt.js/issues/7172
+  generate: {
+    fallback: true,
+  },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 };
