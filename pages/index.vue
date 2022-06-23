@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-card class="mx-auto" max-width="600">
-      <v-card-title class="justify-center text-h3 pt-6"
+      <v-card-title class="justify-center text-h4 text-sm-h3 pt-6"
         >DnD Monster Search</v-card-title
       >
       <v-autocomplete
@@ -39,18 +39,15 @@ export default {
 
   methods: {
     search() {
-      if (this.searchInput.index) {
-        this.$store.commit("changeMonster", this.searchInput.index);
-        this.$router.push("monsters");
+      if (this.searchInput) {
+        this.$router.push(`monsters/${this.searchInput.index}`);
       }
     },
     imFeelingLucky() {
-      this.$store.commit(
-        "changeMonster",
+      const monsterIndex =
         this.monsters[Math.floor(Math.random() * this.monsters.length - 1)]
-          .index
-      );
-      this.$router.push("monsters");
+          .index;
+      this.$router.push(`monsters/${monsterIndex}`);
     },
   },
 

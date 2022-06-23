@@ -190,7 +190,7 @@ export default {
     },
   },
   async mounted() {
-    const monsterIndex = this.$store.state.monster;
+    const monsterIndex = this.$route.params.monster;
     const url = `https://www.dnd5eapi.co/api/monsters/${monsterIndex}`;
 
     this.monster = await this.$axios.$get(url);
