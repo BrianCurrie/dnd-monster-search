@@ -74,32 +74,31 @@
           </v-card-text>
         </v-container>
         <v-divider class="my-2" />
-        <v-card-text class="py-2">
-          <b v-if="savingThrows.length !== 0">Saving Throws</b>{{ " " }}
+        <v-card-text v-if="savingThrows.length !== 0" class="py-2">
+          <b>Saving Throws</b>{{ " " }}
           <span v-for="savingThrow in savingThrows"
             >{{ savingThrow.proficiency.name.replace("Saving Throw: ", "") }}
             {{ savingThrow.value }}{{ " " }}
           </span>
         </v-card-text>
-        <v-card-text class="py-2">
-          <b v-if="skills.length !== 0">Skills</b>{{ " " }}
+        <v-card-text v-if="skills.length !== 0" class="py-2">
+          <b>Skills</b>{{ " " }}
           <span v-for="skill in skills"
             >{{ skill.proficiency.name.replace("Skill: ", "") }} {{ skill.value
             }}{{ " " }}
           </span>
         </v-card-text>
-        <v-card-text class="py-2">
-          <b v-if="monster.senses.length !== 0">Senses</b>{{ " " }}
+        <v-card-text v-if="monster.senses.length !== 0" class="py-2">
+          <b>Senses</b>{{ " " }}
           <span v-for="(value, key) in monster.senses"
             >{{ key.replace("_", " ") }}: {{ value }}{{ " " }}</span
           >
         </v-card-text>
-        <v-card-text class="py-2"
-          ><b v-if="monster.languages.length !== 0">Languages</b>
-          {{ monster.languages }}</v-card-text
+        <v-card-text v-if="monster.languages.length !== 0" class="py-2"
+          ><b>Languages</b> {{ monster.languages }}</v-card-text
         >
         <v-card-text class="py-2">
-          <b v-if="monster.challenge_rating !== 0">Challenge</b>
+          <b>Challenge</b>
           {{ monster.challenge_rating }} ({{ monster.xp }} XP)
         </v-card-text>
         <v-divider class="my-2" />
@@ -150,7 +149,7 @@
       <v-skeleton-loader type="card-heading, list-item, divider" />
 
       <v-skeleton-loader
-        type=" list-item@3, divider, table-row, divider, list-item@3, divider, list-item@3"
+        type=" list-item@3, divider, table-row, divider, list-item@3, divider, card-heading, divider, list-item@3"
       /> </v-card
   ></v-container>
 </template>
