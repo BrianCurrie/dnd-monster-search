@@ -1,6 +1,6 @@
 <template>
   <v-container v-if="monster.name !== undefined">
-    <v-card class="mx-auto pa-6" max-width="800">
+    <v-card class="mx-auto my-6 pa-6" max-width="800">
       <v-btn to="/" nuxt> <v-icon> mdi-arrow-left</v-icon> Back </v-btn>
       <v-card-title class="text-h4 text-break">{{ monster.name }}</v-card-title>
       <v-card-subtitle class="font-italic text-subtitle-1"
