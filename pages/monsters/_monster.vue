@@ -75,30 +75,32 @@
         </v-container>
         <v-divider class="my-2" />
         <v-card-text class="py-2">
-          <b>Saving Throws</b>{{ " " }}
+          <b v-if="savingThrows.length !== 0">Saving Throws</b>{{ " " }}
           <span v-for="savingThrow in savingThrows"
             >{{ savingThrow.proficiency.name.replace("Saving Throw: ", "") }}
             {{ savingThrow.value }}{{ " " }}
           </span>
         </v-card-text>
         <v-card-text class="py-2">
-          <b>Skills</b>{{ " " }}
+          <b v-if="skills.length !== 0">Skills</b>{{ " " }}
           <span v-for="skill in skills"
             >{{ skill.proficiency.name.replace("Skill: ", "") }} {{ skill.value
             }}{{ " " }}
           </span>
         </v-card-text>
         <v-card-text class="py-2">
-          <b>Senses</b>{{ " " }}
+          <b v-if="monster.senses.length !== 0">Senses</b>{{ " " }}
           <span v-for="(value, key) in monster.senses"
             >{{ key.replace("_", " ") }}: {{ value }}{{ " " }}</span
           >
         </v-card-text>
         <v-card-text class="py-2"
-          ><b>Languages</b> {{ monster.languages }}</v-card-text
+          ><b v-if="monster.languages.length !== 0">Languages</b>
+          {{ monster.languages }}</v-card-text
         >
         <v-card-text class="py-2">
-          <b>Challenge</b> {{ monster.challenge_rating }} ({{ monster.xp }} XP)
+          <b v-if="monster.challenge_rating !== 0">Challenge</b>
+          {{ monster.challenge_rating }} ({{ monster.xp }} XP)
         </v-card-text>
         <v-divider class="my-2" />
         <v-card-text
@@ -142,6 +144,15 @@
       </div>
     </v-card>
   </v-container>
+  <v-container v-else
+    ><v-card class="mx-auto my-6 pa-6" max-width="800">
+      <v-skeleton-loader class="mb-2" type="button" />
+      <v-skeleton-loader type="card-heading, list-item, divider" />
+
+      <v-skeleton-loader
+        type=" list-item@3, divider, table-row, divider, list-item@3, divider, list-item@3"
+      /> </v-card
+  ></v-container>
 </template>
 
 <script>
