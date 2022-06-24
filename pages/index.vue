@@ -39,7 +39,7 @@ export default {
 
   methods: {
     search() {
-      if (this.searchInput) {
+      if (this.searchInput && this.searchInput.index) {
         this.$router.push(`monsters/${this.searchInput.index}`);
       }
     },
